@@ -7,6 +7,7 @@ import { useRouter } from 'expo-router';
 import Toast from 'react-native-toast-message';
 import Loading from '../components/Loading';
 import CustomModal from '../components/customModals';
+import CustomKeyboardView from '../components/CustomKeyboardView';
 
 
 export default function SignIn() {
@@ -29,7 +30,7 @@ export default function SignIn() {
     }
 
     return (
-        <View className="flex-1">
+        <CustomKeyboardView>
             <StatusBar style='dark' />
             <View style={{ paddingTop: hp(8), paddingHorizontal: wp(5) }} className="flex-1 gap-12">
                 {/* signIn images */}
@@ -98,6 +99,6 @@ export default function SignIn() {
                 message={errorMessage}
                 onClose={() => setModalVisible(false)}
             />
-        </View>
+        </CustomKeyboardView>
     )
 }
