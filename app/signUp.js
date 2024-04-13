@@ -5,7 +5,6 @@ import { StatusBar } from 'expo-status-bar';
 import { Octicons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import Toast from 'react-native-toast-message';
 import Loading from '../components/Loading';
 import CustomKeyboardView from '../components/CustomKeyboardView';
 
@@ -13,6 +12,7 @@ export default function SignUp() {
 
     const router = useRouter();
     const [loading, setLoding] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     const emailRef = useRef("");
     const passwordRef = useRef("");
@@ -61,18 +61,7 @@ export default function SignUp() {
                         />
                     </View>
                     <View style={{height: hp(7)}} className="flex-row gap-4 px-4 bg-neutral-100 items-center rounded-xl">
-                        <Octicons name="lock" size={hp(2,7)} color="gray" />
-                        <TextInput
-                            onChangeText={value => passwordRef.current=value}
-                            style={{fontSize: hp(2)}}
-                            className="flex-1 font-semibold text-neutral-700"
-                            placeholder='Please enter your password'
-                            secureTextEntry
-                            placeholderTextColor={'gray'}
-                        />
-                    </View>
-                    <View style={{height: hp(7)}} className="flex-row gap-4 px-4 bg-neutral-100 items-center rounded-xl">
-                    <FontAwesome5 name="images" size={hp(2,7)} color="gray" />
+                        <FontAwesome5 name="images" size={hp(2,7)} color="gray" />
                         <TextInput
                             onChangeText={value => profileRef.current=value}
                             style={{fontSize: hp(2)}}
@@ -81,8 +70,22 @@ export default function SignUp() {
                             placeholderTextColor={'gray'}
                         />
                     </View>
+                    <View style={{height: hp(7)}} className="flex-row gap-4 px-4 bg-neutral-100 items-center rounded-xl">
+                        <Octicons name="lock" size={hp(2,7)} color="gray" />
+                        <TextInput
+                            onChangeText={value => passwordRef.current=value}
+                            style={{fontSize: hp(2)}}
+                            className="flex-1 font-semibold text-neutral-700"
+                            placeholder='Please enter your password'
+                            secureTextEntry={!showPassword}
+                            placeholderTextColor={'gray'}
+                        />
+                        <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+                            <FontAwesome5 name={showPassword ? 'eye-slash' : 'eye'} size={hp(2.7)} color="gray" />
+                        </TouchableOpacity>
+                    </View>
 
-                    {/* signin button */}
+                    {/* signup button */}
 
                     <View>
                         {
