@@ -3,8 +3,8 @@ import React, { useRef, useState } from 'react';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { StatusBar } from 'expo-status-bar';
 import { Octicons } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import Toast from 'react-native-toast-message';
 import Loading from '../components/Loading';
 import CustomModal from '../components/customModals';
 import CustomKeyboardView from '../components/CustomKeyboardView';
@@ -13,7 +13,8 @@ import CustomKeyboardView from '../components/CustomKeyboardView';
 export default function SignIn() {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
-    const [modalVisible, setModalVisible] = useState(false); // State to manage modal visibility
+    const [showPassword, setShowPassword] = useState(false);
+    const [modalVisible, setModalVisible] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
     const emailRef = useRef("");
@@ -59,9 +60,12 @@ export default function SignIn() {
                                 style={{ fontSize: hp(2) }}
                                 className="flex-1 font-semibold text-neutral-700"
                                 placeholder='Please enter your password'
-                                secureTextEntry
+                                secureTextEntry={!showPassword}
                                 placeholderTextColor={'gray'}
                             />
+                            <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+                                <FontAwesome5 name={showPassword ? 'eye-slash' : 'eye'} size={hp(2.7)} color="gray" />
+                            </TouchableOpacity>
                         </View>
                         <Text style={{ fontSize: hp(1.8) }} className="font-semibold text-right text-neutral-500 underline">Forgot Password?</Text>
                     </View>
