@@ -7,11 +7,13 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import Loading from '../components/Loading';
 import CustomKeyboardView from '../components/CustomKeyboardView';
+import { useAuth } from '../context/authContext';
 
 export default function SignUp() {
 
     const router = useRouter();
-    const [loading, setLoding] = useState(false);
+    const { register } = useAuth();
+    const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
     const emailRef = useRef("");
@@ -19,13 +21,20 @@ export default function SignUp() {
     const usernameRef = useRef("")
     const profileRef = useRef("")
 
-    const handleRegister = async () => {
+    const handleSignup = async () => {
         if(!emailRef.current || !passwordRef.current || !usernameRef.current || !profileRef.current) {
             Alert.alert('Sign Up Error', 'Please fill all fields!');
             return;
         }
+        setLoading(true);
 
-        //register process
+        let response = await register(emailRef.current, passwordRef.current, usernameRef.current, profileRef.current);
+        setLoading(false);
+
+        console.log('result: ', response);
+        if(!response.success) {
+            Alert.alert('Sign Up Error', response.message);
+        }
     }
 
     return (
@@ -94,7 +103,7 @@ export default function SignUp() {
                                     <Loading size={hp(6.5)} />
                                 </View>
                             ):(
-                                <TouchableOpacity onPress={handleRegister} style={{height: hp(6.5), backgroundColor: '#4F46E5', borderRadius: 12, justifyContent: 'center', alignItems: 'center'}}>
+                                <TouchableOpacity onPress={handleSignup} style={{height: hp(6.5), backgroundColor: '#4F46E5', borderRadius: 12, justifyContent: 'center', alignItems: 'center'}}>
                                     <Text style={{ fontSize: hp(2.7) }} className="text-white font-bold tracking-wider">
                                         Sign Up
                                     </Text>
