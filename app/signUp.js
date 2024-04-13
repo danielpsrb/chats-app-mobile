@@ -5,10 +5,8 @@ import { StatusBar } from 'expo-status-bar';
 import { Octicons } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import Toast from 'react-native-toast-message';
 import Loading from '../components/Loading';
 import CustomKeyboardView from '../components/CustomKeyboardView';
-// import { icon } from '../constants'
 
 export default function SignUp() {
 
@@ -63,6 +61,16 @@ export default function SignUp() {
                         />
                     </View>
                     <View style={{height: hp(7)}} className="flex-row gap-4 px-4 bg-neutral-100 items-center rounded-xl">
+                        <FontAwesome5 name="images" size={hp(2,7)} color="gray" />
+                        <TextInput
+                            onChangeText={value => profileRef.current=value}
+                            style={{fontSize: hp(2)}}
+                            className="flex-1 font-semibold text-neutral-700"
+                            placeholder='Please enter your profile url'
+                            placeholderTextColor={'gray'}
+                        />
+                    </View>
+                    <View style={{height: hp(7)}} className="flex-row gap-4 px-4 bg-neutral-100 items-center rounded-xl">
                         <Octicons name="lock" size={hp(2,7)} color="gray" />
                         <TextInput
                             onChangeText={value => passwordRef.current=value}
@@ -76,18 +84,8 @@ export default function SignUp() {
                             <FontAwesome5 name={showPassword ? 'eye-slash' : 'eye'} size={hp(2.7)} color="gray" />
                         </TouchableOpacity>
                     </View>
-                    <View style={{height: hp(7)}} className="flex-row gap-4 px-4 bg-neutral-100 items-center rounded-xl">
-                    <FontAwesome5 name="images" size={hp(2,7)} color="gray" />
-                        <TextInput
-                            onChangeText={value => profileRef.current=value}
-                            style={{fontSize: hp(2)}}
-                            className="flex-1 font-semibold text-neutral-700"
-                            placeholder='Please enter your profile url'
-                            placeholderTextColor={'gray'}
-                        />
-                    </View>
 
-                    {/* signin button */}
+                    {/* signup button */}
 
                     <View>
                         {
