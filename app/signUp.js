@@ -8,11 +8,13 @@ import { useRouter } from 'expo-router';
 import Toast from 'react-native-toast-message';
 import Loading from '../components/Loading';
 import CustomKeyboardView from '../components/CustomKeyboardView';
+// import { icon } from '../constants'
 
 export default function SignUp() {
 
     const router = useRouter();
     const [loading, setLoding] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     const emailRef = useRef("");
     const passwordRef = useRef("");
@@ -67,9 +69,12 @@ export default function SignUp() {
                             style={{fontSize: hp(2)}}
                             className="flex-1 font-semibold text-neutral-700"
                             placeholder='Please enter your password'
-                            secureTextEntry
+                            secureTextEntry={!showPassword}
                             placeholderTextColor={'gray'}
                         />
+                        <TouchableOpacity onPress={() => setShowPassword(!showPassword)}>
+                            <FontAwesome5 name={showPassword ? 'eye-slash' : 'eye'} size={hp(2.7)} color="gray" />
+                        </TouchableOpacity>
                     </View>
                     <View style={{height: hp(7)}} className="flex-row gap-4 px-4 bg-neutral-100 items-center rounded-xl">
                     <FontAwesome5 name="images" size={hp(2,7)} color="gray" />
