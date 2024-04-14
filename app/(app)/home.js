@@ -13,7 +13,7 @@ export default function Home() {
         <View>
             <Text>Home</Text>
             <Button title="Logout" onPress={handleLogout}>
-                <Text>Sign Out</Text>
+                <Text>Logout</Text>
             </Button>
         </View>
     )
